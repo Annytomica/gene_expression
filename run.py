@@ -12,7 +12,9 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('FUSdelta14_gene_expression_database')
 
-expression = SHEET.worksheet('expression')
-data = expression.get_all_values()
+NAMES = SHEET.worksheet("names").get_all_values()
+ENSEMBL = SHEET.worksheet("ensembl").get_all_values()
+DATA = SHEET.worksheet("expression").get_all_values()
+HEADINGS = DATA[0]
 
-print(data)
+print(HEADINGS)
