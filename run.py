@@ -17,4 +17,8 @@ ENSEMBL = SHEET.worksheet("ensembl").get_all_values()
 DATA = SHEET.worksheet("expression").get_all_values()
 HEADINGS = DATA[0]
 
-print(HEADINGS)
+fus_index = NAMES.index(['Fus'])
+print(fus_index)
+
+gene_data = DATA[fus_index]
+print(gene_data)
