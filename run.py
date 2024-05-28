@@ -1,5 +1,6 @@
 import gspread
 from google.oauth2.service_account import Credentials
+from pprint import pprint
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -17,8 +18,11 @@ ENSEMBL = SHEET.worksheet("ensembl").get_all_values()
 DATA = SHEET.worksheet("expression").get_all_values()
 HEADINGS = DATA[0]
 
-fus_index = NAMES.index(['Fus'])
+user_gene = input(('Enter gene name here:'))
+
+fus_index = NAMES.index([user_gene])
 print(fus_index)
 
 gene_data = DATA[fus_index]
 print(gene_data)
+
