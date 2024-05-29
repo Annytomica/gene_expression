@@ -19,10 +19,19 @@ EXPRESSION = SHEET.worksheet("expression").col_values(5)
 DATA = SHEET.worksheet("expression").get_all_values()
 HEADINGS = DATA[0]
 
-user_gene = input('Enter gene name here: ').capitalize()
+def name_search():
+    user_gene = input('Enter gene name here: ').capitalize()
+
+    if user_gene in NAMES:
+        global gene_index
+        gene_index = NAMES.index(user_gene)
+        # return gene_index
+    else:
+        print(f"{user_gene} not found in dataset")
 #user_ensembl = input('Enter Ensembl ID here: ').upper()
 
-gene_index = NAMES.index(user_gene)
+name_search()
+
 gene_data = DATA[gene_index]
 expression_data = round(float(EXPRESSION[gene_index]), 2)
 print(gene_data)
