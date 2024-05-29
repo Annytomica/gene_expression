@@ -84,6 +84,8 @@ This flowchart was used to guide the development of functions and processes with
 I would like to acknowledge and thank the following people and resources used in the creation of this site.
 
 ## Content
+- linking API and Googlesheets process and code taken from CI Love Sandwiches walkthrough project
+- [geeksforgeeks.org](https://www.geeksforgeeks.org/precision-handling-python/) for rounding float to 2 decimal places tutorial
 
 ## Media
 
