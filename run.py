@@ -24,9 +24,9 @@ user_gene = input('Enter gene name here: ').capitalize()
 
 gene_index = NAMES.index(user_gene)
 gene_data = DATA[gene_index]
-expression_data = float(EXPRESSION[gene_index])
+expression_data = round(float(EXPRESSION[gene_index]), 2)
 print(gene_data)
-print(round(expression_data, 2))
+print(expression_data)
 
 '''
 ensembl_index = ENSEMBL.index(user_ensembl)
