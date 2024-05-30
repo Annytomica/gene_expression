@@ -20,25 +20,59 @@ DATA = SHEET.worksheet("expression").get_all_values()
 HEADINGS = DATA[0]
 
 def user_search():
-    print('''
-    Welcome to the gene expression search engine!
-    Here you can search expression changes of your gene of interest in the FUSDelta14 model of MND
-    You can search using a gene name or Ensembl ID
-    To search by gene name enter 1
-    To search by Ensembl ID enter 2
-    ''')
-    search_type = input('Enter 1 or 2 now: \n')
+    """ 
+    Gets search type choice from user
+    """
+    while True:
+        print('''
+        You can search using a gene name or Ensembl ID
+        To search by gene name enter 1
+        To search by Ensembl ID enter 2
+        ''')
+        search_type = input('Enter 1 or 2 now: \n')
+
+        if validate_user_search(search_type):
+            print('Search type valid\n')
+            break
     
+    return search_type
+
     if search_type == '1':
         print('You have chosen to search by gene name\n')
         name_search()
     elif search_type == '2':
         print('You have chosen to search by ensembl ID\n')
         ensembl_search()
-    else:
-        print('You have entered an invalid value. Please enter 1 or 2')
+
+def validate_user_search(values):
+    """
+    Uses try method to check validity of search_type input from user
+    Raises a ValueError if:
+    1. input is not a number ie. cannot be converted to an integer
+    2. is not 1 or 2, which are the only numerical choices that are valid
+    It does not assume the user will input a single value, which is why iteration is used.
+    This is a modification of the try method used in CI Love Sandwiches walkthrough project
+    """
+
+    try:
+        [int(value) for value in values]
+        if not values == '1' or values == '2':
+            raise ValueError(
+                f"You have entered an invalid value. Please enter 1 or 2.\n"
+                )
+    except ValueError as e:
+        print(f"Invalid data: {e}, please enter a numerical value of 1 or 2.\n")
+        return False
+
+    return True
+
+def search_selection():
 
 def name_search():
+    """ 
+    Takes gene name from user and searches database for gene
+    Outputs index for gene if present, or notifies user gene not found in database
+    """
     user_gene = input('Enter gene name here: ').capitalize()
 
     if user_gene in NAMES:
@@ -47,18 +81,28 @@ def name_search():
         # return gene_index
     else:
         print(f"{user_gene} not found in dataset")
-#user_ensembl = input('Enter Ensembl ID here: ').upper()
 
 def ensembl_search():
+    """ 
+    Takes ensembl ID from user and searches database for gene
+    Outputs index for gene if present, or notifies user gene not found in database
+    """
+    user_ensembl = input('Enter Ensembl ID here: ').upper()
     ensembl_index = ENSEMBL.index(user_ensembl)
     ensembl_data = DATA[ensembl_index]
     print(ensembl_data)
 
+
+print("""
+    Welcome to the gene expression search engine!
+    Here you can search expression changes of your gene of interest in the FUSDelta14 model of MND
+    This data is from Devoy et al., Brain, 2017.
+    """)
 user_search()
 
-gene_data = DATA[gene_index]
-expression_data = round(float(EXPRESSION[gene_index]), 2)
-print(gene_data)
-print(expression_data)
+#gene_data = DATA[gene_index]
+#expression_data = round(float(EXPRESSION[gene_index]), 2)
+#print(gene_data)
+#print(expression_data)
 
 
