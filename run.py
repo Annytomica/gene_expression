@@ -16,6 +16,7 @@ SHEET = GSPREAD_CLIENT.open('FUSdelta14_gene_expression_database')
 NAMES = SHEET.worksheet("expression").col_values(1)
 ENSEMBL = SHEET.worksheet("expression").col_values(2)
 EXPRESSION = SHEET.worksheet("expression").col_values(5)
+PVALUE = SHEET.worksheet("expression").col_values(6)
 DATA = SHEET.worksheet("expression").get_all_values()
 HEADINGS = DATA[0]
 
@@ -29,7 +30,8 @@ def user_search():
         To search by gene name enter 1
         To search by Ensembl ID enter 2
         ''')
-        search_type = input('Enter 1 or 2 now: \n')
+        global search_type
+        search_type = input('Enter 1 or 2 now: ')
 
         if validate_user_search(search_type):
             print('Search type valid\n')
@@ -80,7 +82,7 @@ def name_search():
     if user_gene in NAMES:
         global gene_index
         gene_index = NAMES.index(user_gene)
-        # return gene_index
+        return gene_index
     else:
         print(f"{user_gene} not found in dataset")
 
@@ -94,12 +96,22 @@ def ensembl_search():
     ensembl_data = DATA[ensembl_index]
     print(ensembl_data)
 
+def gene_expression():
+    """ 
+    Takes gene index and outputs the expression data, with rounding to 2 decimal places, for the relevant gene
+    """
+    expression_data = round(float(EXPRESSION[gene_index]), 2)
+    gene = NAMES[gene_index]
+    pvalue = round(float(PVALUE[gene_index]), 4)
+    print(f'The gene {gene} is differentially expressed by {expression_data}% with a significance of {pvalue}')
+
 def main():
     """ 
     Runs all functions for gene expression database search
     """
     user_search()
     search_selection()
+    gene_expression()
 
 
 print("""
@@ -110,7 +122,7 @@ print("""
 main()
 
 #gene_data = DATA[gene_index]
-#expression_data = round(float(EXPRESSION[gene_index]), 2)
+#
 #print(gene_data)
 #print(expression_data)
 
