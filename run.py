@@ -104,10 +104,12 @@ def gene_expression():
     expression_data = round(float(EXPRESSION[gene_index]), 2)
     gene = NAMES[gene_index]
     pvalue = round(float(PVALUE[gene_index]), 4)
-    print(f'The gene {gene} is differentially expressed by {expression_data}%,\n with a significance (p-value) of {pvalue}')
+    print(f'\nThe gene {gene} is differentially expressed by {expression_data}%,\n with a significance (p-value) of {pvalue}')
     print(""" 
-    A positive expression % indicates an upregulation of gene expression from normal controls
-    A negative expression % indicates a downregulation of gene expression from normal controls
+    A positive expression % indicates an upregulation of gene expression 
+    from normal controls
+    A negative expression % indicates a downregulation of gene expression 
+    from normal controls
     """)
 
 def not_found():

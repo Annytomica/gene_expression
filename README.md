@@ -76,6 +76,7 @@ This flowchart was used to guide the development of functions and processes with
 ## Fixed
 
 ## Unfixed
+- gene_expression function print output occurs twice if user has selected to search again on deployed app.
 
 # Deployment
 
