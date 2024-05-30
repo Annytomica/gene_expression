@@ -51,7 +51,7 @@ def validate_input(values):
 
     try:
         [int(value) for value in values]
-        if not values == '1' or values == '2':
+        if values != '1' and values != '2':
             raise ValueError(
                 f"You have entered an invalid number: {values}"
                 )
