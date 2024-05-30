@@ -56,7 +56,7 @@ def validate_user_search(values):
                 f"You have entered an invalid number: {values}"
                 )
     except ValueError as e:
-        print(f"Invalid data: {e}. Please enter a numerical value of 1 or 2.")
+        print(f"Invalid data: {values}. Please enter a numerical value of 1 or 2.")
         return False
 
     return True
@@ -85,6 +85,7 @@ def name_search():
         return gene_index
     else:
         print(f"{user_gene} not found in dataset")
+        not_found()
 
 def ensembl_search():
     """ 
@@ -105,6 +106,29 @@ def gene_expression():
     gene = NAMES[gene_index]
     pvalue = round(float(PVALUE[gene_index]), 4)
     print(f'The gene {gene} is differentially expressed by {expression_data}% with a significance of {pvalue}')
+
+def not_found():
+    """ 
+    Function to deal with user input (gene name or Ensembl ID) not being found in dataset
+    """
+    print("""
+    Potential reasons why your gene was not found:
+    1. Your gene is not significantly disregulated in the FUSDelta14 model.
+        - this dataset only contains genes with significance (p-value) of 0.01 or lower
+    2. Your gene was not identified in the RNAseq analysis
+        - low abundance transcripts are not always identified successfully
+        - you can check your genes expected expression level in spinal cord at GeneCards.org
+    3. Your gene input had a typo:
+        - Please check you input, as not all typo's can be detected by our validation protocols
+    4. Your gene is not a mouse gene:
+        - This dataset is from mouse, therefore contains mouse genes only.
+        - you can check correct mouse gene nomenclature at ensembl.org
+    """)
+
+    search_again()
+
+def search_again():
+    print("Would you like to search for another gene?\n")
 
 def main():
     """ 
