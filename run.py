@@ -128,7 +128,23 @@ def not_found():
     search_again()
 
 def search_again():
-    print("Would you like to search for another gene?\n")
+    """ 
+    Function to check if user wants to search for another gene or exit search engine
+    """
+    print("Would you like to search for another gene?\n Enter Y for Yes to continue or N for No to exit search engine")
+
+    try_again = input('Please enter Y or N: ').upper()
+
+    try:
+        [try_again == 'Y' or try_again == 'N']
+    except ValueError:
+        print(f"Invalid input: {try_again}. Please enter Y or N")
+    else:
+        if try_again == 'Y':
+            main()
+        elif try_again == 'N':
+            print("Thank you for using the FUSDelta14 gene expression search engine!")
+            exit()
 
 def main():
     """ 
