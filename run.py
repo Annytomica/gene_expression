@@ -33,13 +33,13 @@ def user_search():
         global search_type
         search_type = input('Enter 1 or 2 now: ')
 
-        if validate_user_search(search_type):
+        if validate_input(search_type):
             print('Search type valid\n')
             break
     
     return search_type
 
-def validate_user_search(values):
+def validate_input(values):
     """
     Uses try method to check validity of search_type input from user
     Raises a ValueError if:
@@ -131,20 +131,35 @@ def search_again():
     """ 
     Function to check if user wants to search for another gene or exit search engine
     """
-    print("Would you like to search for another gene?\n Enter Y for Yes to continue or N for No to exit search engine")
+    initiate_search_again()
+    process_search_again()
 
-    try_again = input('Please enter Y or N: ').upper()
+def initiate_search_again():
+    """ 
+    Function that initiates the request proccessing for searching agiain or exiting search engine
+    """
+    while True:
+        print("Would you like to search for another gene?\n Enter 1 for Yes to continue or 2 for No to exit search engine")
 
-    try:
-        [try_again == 'Y' or try_again == 'N']
-    except ValueError:
-        print(f"Invalid input: {try_again}. Please enter Y or N")
-    else:
-        if try_again == 'Y':
-            main()
-        elif try_again == 'N':
-            print("Thank you for using the FUSDelta14 gene expression search engine!")
-            exit()
+        global try_again
+        try_again = input('Please enter 1 for Yes or 2 for No: ')
+
+        if validate_input(try_again):
+            print("Processing request...")
+            break
+
+    return try_again
+
+def process_search_again():
+    """ 
+    Function to process search again/exit request after validation
+    """
+
+    if try_again == '1':
+        main()
+    elif try_again == '2':
+        print("Thank you for using the FUSDelta14 gene expression search engine!")
+        exit()
 
 def main():
     """ 
