@@ -37,13 +37,6 @@ def user_search():
     
     return search_type
 
-    if search_type == '1':
-        print('You have chosen to search by gene name\n')
-        name_search()
-    elif search_type == '2':
-        print('You have chosen to search by ensembl ID\n')
-        ensembl_search()
-
 def validate_user_search(values):
     """
     Uses try method to check validity of search_type input from user
@@ -67,6 +60,15 @@ def validate_user_search(values):
     return True
 
 def search_selection():
+    """
+    Takes validated search type and selects appropriate gene search function 
+    """
+    if search_type == '1':
+        print('You have chosen to search by gene name\n')
+        name_search()
+    elif search_type == '2':
+        print('You have chosen to search by ensembl ID\n')
+        ensembl_search()
 
 def name_search():
     """ 
@@ -92,13 +94,20 @@ def ensembl_search():
     ensembl_data = DATA[ensembl_index]
     print(ensembl_data)
 
+def main():
+    """ 
+    Runs all functions for gene expression database search
+    """
+    user_search()
+    search_selection()
+
 
 print("""
     Welcome to the gene expression search engine!
     Here you can search expression changes of your gene of interest in the FUSDelta14 model of MND
     This data is from Devoy et al., Brain, 2017.
     """)
-user_search()
+main()
 
 #gene_data = DATA[gene_index]
 #expression_data = round(float(EXPRESSION[gene_index]), 2)
