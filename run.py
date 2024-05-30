@@ -104,7 +104,7 @@ def gene_expression():
     expression_data = round(float(EXPRESSION[gene_index]), 2)
     gene = NAMES[gene_index]
     pvalue = round(float(PVALUE[gene_index]), 4)
-    print(f'The gene {gene} is differentially expressed by {expression_data}% with a significance of {pvalue}')
+    print(f'The gene {gene} is differentially expressed by {expression_data}%,\n with a significance (p-value) of {pvalue}')
 
 def not_found():
     """ 
@@ -116,7 +116,7 @@ def not_found():
         - this dataset only contains genes with significance (p-value) of 0.01 or lower
     2. Your gene was not identified in the RNAseq analysis
         - low abundance transcripts are not always identified successfully
-        - you can check your genes expected expression level in spinal cord at GeneCards.org
+        - you can check your genes expression level in spinal cord at GeneCards.org
     3. Your gene input had a typo:
         - Please check you input, as not all typo's can be detected by our validation protocols
     4. Your gene is not a mouse gene:
@@ -167,11 +167,13 @@ def main():
     user_search()
     search_selection()
     gene_expression()
+    search_again()
 
 
 print("""
     Welcome to the gene expression search engine!
-    Here you can search expression changes of your gene of interest in the FUSDelta14 model of MND
+    Here you can search expression changes of your gene of interest 
+    in the FUSDelta14 model of MND
     This data is from Devoy et al., Brain, 2017.
     """)
 main()
