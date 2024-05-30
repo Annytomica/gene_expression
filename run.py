@@ -31,7 +31,7 @@ def user_search():
         To search by Ensembl ID enter 2
         ''')
         global search_type
-        search_type = input('Enter 1 or 2 now: ')
+        search_type = input('Enter 1 or 2 now: \n')
 
         if validate_input(search_type):
             print('Search type valid\n')
@@ -77,7 +77,7 @@ def name_search():
     Takes gene name from user and searches database for gene
     Outputs index for gene if present, or notifies user gene not found in database
     """
-    user_gene = input('Enter gene name here: ').capitalize()
+    user_gene = input('Enter gene name here: \n').capitalize()
 
     if user_gene in NAMES:
         global gene_index
@@ -92,7 +92,7 @@ def ensembl_search():
     Takes ensembl ID from user and searches database for gene
     Outputs index for gene if present, or notifies user gene not found in database
     """
-    user_ensembl = input('Enter Ensembl ID here: ').upper()
+    user_ensembl = input('Enter Ensembl ID here: \n').upper()
     ensembl_index = ENSEMBL.index(user_ensembl)
     ensembl_data = DATA[ensembl_index]
     print(ensembl_data)
@@ -142,7 +142,7 @@ def initiate_search_again():
         print("Would you like to search for another gene?\n Enter 1 for Yes to continue or 2 for No to exit search engine")
 
         global try_again
-        try_again = input('Please enter 1 for Yes or 2 for No: ')
+        try_again = input('Please enter 1 for Yes or 2 for No: \n')
 
         if validate_input(try_again):
             print("Processing request...")
