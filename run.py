@@ -117,12 +117,15 @@ def not_found():
     print("""
     Potential reasons why your gene was not found:
     1. Your gene is not significantly disregulated in the FUSDelta14 model.
-        - this dataset only contains genes with significance (p-value) of 0.01 or lower
+        - this dataset only contains genes with significance (p-value) of 
+        0.01 or lower
     2. Your gene was not identified in the RNAseq analysis
         - low abundance transcripts are not always identified successfully
-        - you can check your genes expression level in spinal cord at GeneCards.org
+        - you can check your genes expression level in spinal cord at 
+        GeneCards.org
     3. Your gene input had a typo:
-        - Please check you input, as not all typo's can be detected by our validation protocols
+        - Please check you input, as not all typo's can be detected by our 
+        validation protocols
     4. Your gene is not a mouse gene:
         - This dataset is from mouse, therefore contains mouse genes only.
         - you can check correct mouse gene nomenclature at ensembl.org
