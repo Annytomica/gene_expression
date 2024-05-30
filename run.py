@@ -53,10 +53,10 @@ def validate_user_search(values):
         [int(value) for value in values]
         if not values == '1' or values == '2':
             raise ValueError(
-                f"You have entered an invalid value. Please enter 1 or 2.\n"
+                f"You have entered an invalid number: {values}"
                 )
     except ValueError as e:
-        print(f"Invalid data: {e}, please enter a numerical value of 1 or 2.\n")
+        print(f"Invalid data: {e}. Please enter a numerical value of 1 or 2.")
         return False
 
     return True
@@ -98,7 +98,8 @@ def ensembl_search():
 
 def gene_expression():
     """ 
-    Takes gene index and outputs the expression data, with rounding to 2 decimal places, for the relevant gene
+    Takes gene index and outputs the expression data and significance value for the relevant gene
+    Formats expression data to 2 decimal places and significance to 4 decimal places.
     """
     expression_data = round(float(EXPRESSION[gene_index]), 2)
     gene = NAMES[gene_index]
