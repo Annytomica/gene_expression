@@ -185,8 +185,8 @@ def search_again():
     """ 
     Function to check if user wants to search for another gene or exit search engine
     """
-    initiate_search_again()
-    process_search_again()
+    try_again = initiate_search_again()
+    process_search_again(try_again)
 
 def initiate_search_again():
     """ 
@@ -195,7 +195,6 @@ def initiate_search_again():
     while True:
         print("Would you like to search for another gene?\n Enter 1 for Yes to continue or 2 for No to exit search engine")
 
-        global try_again
         try_again = input('Please enter 1 for Yes or 2 for No: \n')
 
         if validate_input(try_again):
@@ -204,7 +203,7 @@ def initiate_search_again():
 
     return try_again
 
-def process_search_again():
+def process_search_again(try_again):
     """ 
     Function to process search again/exit request after validation
     """
