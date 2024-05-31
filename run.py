@@ -24,6 +24,7 @@ HEADINGS = DATA[0]
 def user_search():
     """ 
     Gets search type choice from user
+    Validates user input
     """
     while True:
         print('''
@@ -31,7 +32,7 @@ def user_search():
         To search by gene name enter 1
         To search by Ensembl ID enter 2
         ''')
-        
+
         search_type = input('Enter 1 or 2 now: \n')
 
         if validate_input(search_type):
@@ -89,6 +90,7 @@ def name_search():
 def ensembl_search():
     """ 
     Takes ensembl ID from user and searches database for gene
+    Validates user input for correct ensembl ID format
     Outputs index for gene if present, or notifies user gene not found in database
     """
     user_ensembl = input('Enter Ensembl ID here: \n').upper()
@@ -107,6 +109,16 @@ def validate_ensembl(value):
     2. That it is 18 characters long
     3. That the last 11 characters are numbers
     """
+    try:
+        [value.startswith('ENSMUSG') and len(value) == 18] 
+        int_value = value.strip('ENSMUSG')
+        if not int(int_value):
+            raise ValueError(f"Incorrect ID: {value}. Ensembl IDs end with 11 numbers")
+        
+    except ValueError as e:
+        print(f"Incorrect data: {value}.\nMust start with 'ENSMUSG' followed by 11 numbers")
+    
+    return True
 
 def gene_expression(gene_index):
     """ 
