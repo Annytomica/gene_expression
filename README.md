@@ -161,12 +161,12 @@ In summary:
 
 If you wish to develop this app further, feel free. To do this, create a fork of this repository and save it to your own github profile. To do this, use the fork button at the top right of this repository. This brings you to a new window, where you select yourself as the owner and can add extra details to name and description of the repo. You will then, if required, deploy to your own Heroku account using the process described above. If you chose to do this, please be respectful and credit me as the origin of this project and code.
 
-![GitHub deployments](https://img.shields.io/github/deployments/Annytomica/memory_game/github-pages)
-![GitHub language count](https://img.shields.io/github/languages/count/Annytomica/memory_game)
-![GitHub top language](https://img.shields.io/github/languages/top/Annytomica/memory_game?color=yellow)
-![GitHub watchers](https://img.shields.io/github/watchers/Annytomica/memory_game)
-![GitHub forks](https://img.shields.io/github/forks/Annytomica/memory_game?style=social)
-![GitHub Repo stars](https://img.shields.io/github/stars/Annytomica/memory_game?style=social)
+![GitHub deployments](https://img.shields.io/github/deployments/Annytomica/gene_expression/heroku)
+![GitHub language count](https://img.shields.io/github/languages/count/Annytomica/gene_expression)
+![GitHub top language](https://img.shields.io/github/languages/top/Annytomica/gene_expression?color=yellow)
+![GitHub watchers](https://img.shields.io/github/watchers/Annytomica/gene_expression)
+![GitHub forks](https://img.shields.io/github/forks/Annytomica/gene_expression?style=social)
+![GitHub Repo stars](https://img.shields.io/github/stars/Annytomica/gene_expression?style=social)
 
 # Credits
 I would like to acknowledge and thank the following people and resources used in the creation of this site.
