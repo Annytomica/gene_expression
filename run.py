@@ -1,4 +1,4 @@
-#setting up API and links to googlesheets
+# setting up API and links to googlesheets
 import gspread
 from google.oauth2.service_account import Credentials
 
@@ -13,14 +13,15 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('FUSdelta14_gene_expression_database')
 
-#Constants that access specific information from database in googlesheets
+# Constants that access specific information from database in googlesheets
 NAMES = SHEET.worksheet("expression").col_values(1)
 ENSEMBL = SHEET.worksheet("expression").col_values(2)
 EXPRESSION = SHEET.worksheet("expression").col_values(5)
 PVALUE = SHEET.worksheet("expression").col_values(6)
 
+
 def user_search():
-    """ 
+    """
     Gets search type choice from user
     Validates user input
     """
@@ -36,8 +37,9 @@ def user_search():
         if validate_input(search_type):
             print('Search type valid\n')
             break
-    
+
     return search_type
+
 
 def validate_input(value):
     """
@@ -45,114 +47,137 @@ def validate_input(value):
     Raises a ValueError if:
     1. input is not a number ie. cannot be converted to an integer
     2. is not 1 or 2, which are the only numerical choices that are valid
-    This is a modification of the try method used in CI Love Sandwiches walkthrough project
+    This is a modification of the try method used in CI Love Sandwiches
+    walkthrough project
     """
     try:
         [int(value)]
         if value != '1' and value != '2':
             raise ValueError(f"You have entered an invalid number: {value}")
-    
+
     except ValueError as e:
-        print(f"Invalid data: {value}. Please enter a numerical value of 1 or 2.")
+        print(f"""
+        Invalid data: {value}.
+        Please enter a numerical value of 1 or 2.""")
         return False
 
     return True
 
+
 def search_selection(search_type):
     """
-    Takes validated search type and selects appropriate gene search function 
+    Takes validated search type and selects appropriate gene search function
     """
     if search_type == '1':
         print('You have chosen to search by gene name\n')
         name_search()
-    
+
     elif search_type == '2':
         print('You have chosen to search by ensembl ID\n')
         ensembl_search()
 
+
 def name_search():
-    """ 
+    """
     Takes gene name from user and searches database for gene
-    Outputs index for gene if present, or notifies user gene not found in database
+    Outputs index for gene if present,
+    or notifies user gene not found in database
     """
     user_gene = input('Enter gene name here: \n').capitalize()
 
     if user_gene in NAMES:
         gene_index = NAMES.index(user_gene)
         gene_expression(gene_index)
-    
+
     else:
         print(f"{user_gene} not found in dataset")
         not_found()
 
+
 def ensembl_search():
-    """ 
+    """
     Takes ensembl ID from user and searches database for gene
     Validates user input for correct ensembl ID format
-    Outputs index for gene if present, or notifies user gene not found in database
+    Outputs index for gene if present,
+    or notifies user gene not found in database
     """
     while True:
-        print(""" 
+        print("""
         This is a mouse gene database. Your Ensembl ID must:
-        1. Start with 'ENSMUSG' 
+        1. Start with 'ENSMUSG'
         2. End with 11 numbers after 'ENSMUSG'
         Example: ENSMUSG00000032047
         """)
-        
+
         user_ensembl = input('Enter Ensembl ID here: \n').upper()
 
         if validate_ensembl(user_ensembl):
             print("Your Ensembl ID is valid\n")
-            
+
             if user_ensembl in ENSEMBL:
                 gene_index = ENSEMBL.index(user_ensembl)
                 gene_expression(gene_index)
                 break
-            
+
             else:
                 print(f"{user_ensembl} not found in dataset")
                 not_found()
                 break
 
+
 def validate_ensembl(value):
-    """ 
+    """
     Checks if user input for ensembl ID is correct format by checking:
-    1. That is starts with the correct ensembl mouse gene nomenclature of ENSMUSG
+    1. That is starts with the correct ensembl mouse gene
+       nomenclature of ENSMUSG
     2. That it is 18 characters long
     3. That the last 11 characters are numbers
     """
     if value.startswith('ENSMUSG') and len(value) == 18:
         try:
             int_value = value[7:]
-            int(int_value) 
-        
+            int(int_value)
+
         except ValueError:
             print(f"Incorrect ID: {value}. Ensembl IDs end with 11 numbers")
             return False
-    
+
         return True
-    
+
     else:
-        print(f"Incorrect data: {value}.\nMust start with 'ENSMUSG' followed by 11 numbers")
+        print(f"""
+        Incorrect data: {value}.
+        Must start with 'ENSMUSG' followed by 11 numbers""")
         return False
 
+
 def gene_expression(gene_index):
-    """ 
-    Takes gene index and outputs the expression data and significance value for the relevant gene
-    Formats expression data to 2 decimal places and significance to 4 decimal places.
+    """
+    Takes gene index and outputs the expression data and
+    significance value for the relevant gene.
+    Formats expression data to 2 decimal places and
+    significance to 4 decimal places.
     """
     expression_data = round(float(EXPRESSION[gene_index]), 2)
     gene = NAMES[gene_index]
     ensembl_id = ENSEMBL[gene_index]
     pvalue = round(float(PVALUE[gene_index]), 4)
-    
-    print(f"\nResult:\nGene: {gene}\nEnsembl ID: {ensembl_id}\nExpression: {expression_data} %\nP-value: {pvalue}\n")
-    print(f'Summary:\nThe gene {gene} is differentially expressed by {expression_data} %,\nwith a significance (p-value) of {pvalue}')
-    print(""" 
+
+    print(f"""
+    Result:
+    Gene: {gene}
+    Ensembl ID: {ensembl_id}
+    Expression: {expression_data} %
+    P-value: {pvalue}\n""")
+    print(f"""
+    Summary:
+    The gene {gene} is differentially expressed by {expression_data} %,
+    with a significance (p-value) of {pvalue}""")
+    print("""
     Explanation of result:
     The result is a comparison of the FUSDelta14 model, when it is showing
     early symptoms of Motor Neuron Disease (MND), compared to healthy controls
-    
+
     1. Expression
     - A positive expression % indicates an upregulation of gene expression
     from healthy controls
@@ -160,26 +185,28 @@ def gene_expression(gene_index):
     from healthy controls
 
     2. p-value
-    This dataset only contains genes with significance (p-value) of 
+    This dataset only contains genes with significance (p-value) of
     0.01 or lower, which is a higher stringency for significance than
     0.05 which is generally regarded as acceptable in this field
     """)
 
+
 def not_found():
-    """ 
-    Function to deal with user input (gene name or Ensembl ID) not being found in dataset
+    """
+    Function to deal with user input (gene name or Ensembl ID)
+    not being found in dataset
     """
     print("""
     Potential reasons why your gene was not found:
     1. Your gene is not significantly disregulated in the FUSDelta14 model.
-        - this dataset only contains genes with significance (p-value) of 
+        - this dataset only contains genes with significance (p-value) of
         0.01 or lower
     2. Your gene was not identified in the RNAseq analysis
         - low abundance transcripts are not always identified successfully
-        - you can check your genes expression level in spinal cord at 
+        - you can check your genes expression level in spinal cord at
         GeneCards.org
     3. Your gene input had a typo:
-        - please check you input, as not all typo's can be detected by our 
+        - please check you input, as not all typo's can be detected by our
         validation protocols
     4. Your gene is not a mouse gene:
         - this dataset is from mouse, therefore contains mouse genes only.
@@ -188,19 +215,25 @@ def not_found():
 
     search_again()
 
+
 def search_again():
-    """ 
-    Function to check if user wants to search for another gene or exit search engine
+    """
+    Function to check if user wants to search for another gene
+    or exit search engine
     """
     try_again = initiate_search_again()
     process_search_again(try_again)
 
+
 def initiate_search_again():
-    """ 
-    Function that initiates the request processing for searching again or exiting search engine
+    """
+    Function that initiates the request processing for searching again
+    or exiting search engine
     """
     while True:
-        print("Would you like to search for another gene?\n Enter 1 for Yes to continue or 2 for No to exit search engine")
+        print("""
+        Would you like to search for another gene?
+        Enter 1 for Yes to continue or 2 for No to exit search engine""")
 
         try_again = input('Please enter 1 for Yes or 2 for No: \n')
 
@@ -210,18 +243,21 @@ def initiate_search_again():
 
     return try_again
 
+
 def process_search_again(try_again):
-    """ 
+    """
     Function to process search again/exit request after validation
     """
     if try_again == '1':
         main()
     elif try_again == '2':
-        print("Thank you for using the FUSDelta14 gene expression search engine!")
+        print("""
+        Thank you for using the FUSDelta14 gene expression search engine!""")
         exit()
 
+
 def main():
-    """ 
+    """
     Runs all functions for gene expression database search
     """
     search_type = user_search()
@@ -231,7 +267,7 @@ def main():
 
 print("""
     Welcome to the gene expression search engine!
-    Here you can search expression changes of your gene of interest 
+    Here you can search expression changes of your gene of interest
     in the FUSDelta14 model of MND
     This data is from Devoy et al., Brain, 2017.
     """)

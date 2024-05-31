@@ -15,6 +15,10 @@ The live application can be found [here]()
 
 ### Request for gene to search
 
+#### Gene Name
+
+#### Ensembl ID
+
 
 ### Output
 
@@ -24,7 +28,8 @@ The live application can be found [here]()
 
 ## Future features
 
-### Search by Ensembl ID
+### Multiple gene search
+### Validation of gene name/ID against all known genes
 
 ### Compare genes
 
@@ -46,7 +51,7 @@ To resolve this issue, and make the information more accessible, a console-based
 ## Design of information processing flow
 A flowchart of the steps in information processing that the app needed to follow was generated in Figma.
 ![flowchart](assets/static/app_flowchart.png)
-This flowchart was used to guide the development of functions and processes within the app
+This flowchart was used to guide the development of functions and processes within the app. As the app was built and changes were made to the flow of the app, the flow chart was adjusted accordingly.
 
 ## Development process
 
@@ -75,10 +80,12 @@ This flowchart was used to guide the development of functions and processes with
 
 # Bugs
 ## Fixed
+- gene_expression function print output occurs twice if user has selected to search again on deployed app. Cause unknown. Was present in first Heroku deployment and dissapeared after update. Logic for calling the function was changed anyway, to protect from similar bug occuring in future.
+- validation of ensembl ID input not working. Does not detect change in length or incorrect format. Logic error - used ChatGPT to troubleshoot and adjust logic so that validation steps worked correctly.
 
 ## Unfixed
-- gene_expression function print output occurs twice if user has selected to search again on deployed app.
-- validation of ensembl ID input not working. Does not detect change in length or incorrect format.
+
+
 
 # Deployment
 
