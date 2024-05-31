@@ -93,14 +93,26 @@ def ensembl_search():
     Validates user input for correct ensembl ID format
     Outputs index for gene if present, or notifies user gene not found in database
     """
-    user_ensembl = input('Enter Ensembl ID here: \n').upper()
+    while True:
+        print(""" 
+        This is a mouse gene database. Your Ensembl ID must:
+        1. Start with 'ENSMUSG' 
+        2. End with 11 numbers after 'ENSMUSG'
+        Example: ENSMUSG00000032047
+        """)
+        
+        user_ensembl = input('Enter Ensembl ID here: \n').upper()
 
-    if user_ensembl in ENSEMBL:
-        gene_index = ENSEMBL.index(user_ensembl)
-        gene_expression(gene_index)
-    else:
-        print(f"{user_ensembl} not found in dataset")
-        not_found()
+        if validate_ensembl(user_ensembl):
+            print("Your Ensembl ID is valid\n")
+            if user_ensembl in ENSEMBL:
+                gene_index = ENSEMBL.index(user_ensembl)
+                gene_expression(gene_index)
+                break
+            else:
+                print(f"{user_ensembl} not found in dataset")
+                not_found()
+                break
 
 def validate_ensembl(value):
     """ 
