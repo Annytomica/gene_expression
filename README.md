@@ -55,6 +55,7 @@ This flowchart was used to guide the development of functions and processes with
 - Python - all app functions
 - Figma – flowchart development
 - Photoshop - Readme image processing
+- ChatGPT - troubleshooting of typos and logic problems
 - Heroku - app deployment and hosting
 
 # Testing
@@ -77,6 +78,7 @@ This flowchart was used to guide the development of functions and processes with
 
 ## Unfixed
 - gene_expression function print output occurs twice if user has selected to search again on deployed app.
+- validation of ensembl ID input not working. Does not detect change in length or incorrect format.
 
 # Deployment
 
@@ -85,13 +87,24 @@ This flowchart was used to guide the development of functions and processes with
 I would like to acknowledge and thank the following people and resources used in the creation of this site.
 
 ## Content
-- linking API and Googlesheets process and code taken from CI Love Sandwiches walkthrough project
+- [Code Institute (CI)](https://github.com/Code-Institute-Solutions) for providing all supporting code for the virtual console used for deployment of app
+- [CI Love Sandwiches walkthrough project](https://github.com/Code-Institute-Solutions/love-sandwiches-p5-sourcecode):
+    - linking API and Google sheets process and code
+    - Deployment to Heroku
+    - usage of try method - used as starting point for validate_input function
+- [Medium](https://aryanirani123.medium.com/read-and-write-data-in-google-sheets-using-python-and-the-google-sheets-api-6e206a242f20) for tutorial on methods of getting specific information from Google sheets
+- [W3Schools](https://www.w3schools.com/python/python_try_except.asp) tutorial on usage of try/except for validation functions
+- [Digital Ocean](https://www.digitalocean.com/community/tutorials/python-valueerror-exception-handling-examples) for tutorial on ValueError handling
+- [ChatGPT](https://chatgpt.com) for typo identification and optimising logic for validation functions (not writing of primary code)
+- [Free Code Camp](https://www.freecodecamp.org/news/python-exit-how-to-use-an-exit-function-in-python-to-stop-a-program/) for tutorial on how to use exit() function
 - [geeksforgeeks.org](https://www.geeksforgeeks.org/precision-handling-python/) for rounding float to 2 decimal places tutorial
 
 ## Media
+The original gene expression data used as the dataset for this app is from [Devoy et al, Brain, 2017](https://academic.oup.com/brain/article/140/11/2797/4372144)
 
 ## Acknowledgements
-
+- My wife, Megan, for help with testing and general emotional support while I was trying to study and code while also moving country
+- My original science colleagues, without thier contributions I would not have produced the dataset this app is based around.
 
 ## Reminders
 
