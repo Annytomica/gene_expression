@@ -117,6 +117,7 @@ This flowchart was used to guide the development of functions and processes with
 - Photoshop - Readme image processing
 - ChatGPT - troubleshooting of typos and logic problems
 - Heroku - app deployment and hosting
+- UI.dev – amiresponsive was used to create site mockup images.
 
 # Testing
 
@@ -144,12 +145,34 @@ PYTHON - PEP8 validation: The app passed validation with no errors reported from
 - App throws type error for search_selection(search_type) after introducing Genes as class and does not run past selecting search option.
 
 # Deployment
+For deployment this project uses a mock terminal for Heroku provided by Code Institute. The app was deployed to Heroku using the process described in the CI python module coursework.
 
+In summary:
+1. Within the IDE used (Gitpod) a requirements.txt document was populated with the list of dependencies for correct deployment by entering the command 'Pip3 freeze > requirements.txt' into the terminal.
+2. Within Heroku the option for setting up a new app was selected and the following settings were set:
+    - Config Vars (key - value):
+        - CREDS - copy and paste content from creds.json file in IDE
+        - PORT - 8000
+    - Buildpacks:
+        - Python
+        - Node.js
+3. The app was then deployed by connecting the corect GitHub repo (gene-expression) and selecting manual deployment option for the first deployment.
+4. The deployment setting was changed to automatic once the majority of functions had been written and tested.
+
+If you wish to develop this app further, feel free. To do this, create a fork of this repository and save it to your own github profile. To do this, use the fork button at the top right of this repository. This brings you to a new window, where you select yourself as the owner and can add extra details to name and description of the repo. You will then, if required, deploy to your own Heroku account using the process described above. If you chose to do this, please be respectful and credit me as the origin of this project and code.
+
+![GitHub deployments](https://img.shields.io/github/deployments/Annytomica/memory_game/github-pages)
+![GitHub language count](https://img.shields.io/github/languages/count/Annytomica/memory_game)
+![GitHub top language](https://img.shields.io/github/languages/top/Annytomica/memory_game?color=yellow)
+![GitHub watchers](https://img.shields.io/github/watchers/Annytomica/memory_game)
+![GitHub forks](https://img.shields.io/github/forks/Annytomica/memory_game?style=social)
+![GitHub Repo stars](https://img.shields.io/github/stars/Annytomica/memory_game?style=social)
 
 # Credits
 I would like to acknowledge and thank the following people and resources used in the creation of this site.
 
 ## Content
+- The original gene expression data used as the dataset for this app is from [Devoy et al, Brain, 2017](https://academic.oup.com/brain/article/140/11/2797/4372144)
 - [Code Institute (CI)](https://github.com/Code-Institute-Solutions) for providing all supporting code for the virtual console used for deployment of app
 - [CI Love Sandwiches walkthrough project](https://github.com/Code-Institute-Solutions/love-sandwiches-p5-sourcecode):
     - linking API and Google sheets process and code
@@ -163,34 +186,8 @@ I would like to acknowledge and thank the following people and resources used in
 - [geeksforgeeks.org](https://www.geeksforgeeks.org/precision-handling-python/) for rounding float to 2 decimal places tutorial
 
 ## Media
-The original gene expression data used as the dataset for this app is from [Devoy et al, Brain, 2017](https://academic.oup.com/brain/article/140/11/2797/4372144)
+- The Github summary bar used in README.md is from [shields.io](https://shields.io/badges/)
 
 ## Acknowledgements
 - My wife, Megan, for help with testing and general emotional support while I was trying to study and code while also moving country
 - My original science colleagues, without thier contributions I would not have produced the dataset this app is based around.
-
-## Reminders
-
-* Your code must be placed in the `run.py` file
-* Your dependencies must be placed in the `requirements.txt` file
-* Do not edit any of the other files or your code may not deploy properly
-
-## Creating the Heroku app
-
-When you create the app, you will need to add two buildpacks from the _Settings_ tab. The ordering is as follows:
-
-1. `heroku/python`
-2. `heroku/nodejs`
-
-You must then create a _Config Var_ called `PORT`. Set this to `8000`
-
-If you have credentials, such as in the Love Sandwiches project, you must create another _Config Var_ called `CREDS` and paste the JSON into the value field.
-
-Connect your GitHub repository and deploy as normal.
-
-## Constraints
-
-The deployment terminal is set to 80 columns by 24 rows. That means that each line of text needs to be 80 characters or less otherwise it will be wrapped onto a second line.
-
------
-Happy coding!
