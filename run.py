@@ -90,7 +90,7 @@ def name_search():
         gene_expression(gene_index)
 
     else:
-        print(f"{user_gene} not found in dataset")
+        print(f"{user_gene} not found in database")
         not_found()
 
 

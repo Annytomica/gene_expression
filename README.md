@@ -43,21 +43,43 @@ After intial selection, if valid, the user recieves a confirmation of thier choi
 
 ![enter-ensembl](assets/static/ensembl_initial-choice.png)
 
-Validation of ensembl ID:
+Validation of ensembl ID: As the ID has a very specific format, the validation confirms that the user input:
+1. That is starts with the correct ensembl mouse gene
+nomenclature of ENSMUSG
+2. That it is 18 characters long
+3. That the last 11 characters are numbers
+
+If the user input is not validated the following error message is displayed and the user is prompted to input the ID again.
+
+![wrong-ensembl](assets/static/incorrect-ensembl.png)
 
 ### Output
+If the gene, searched via name or ID, is found in the database the user recieves a tabulated result and summary statement of the result.
 
+![result](assets/static/output-result.png)
+
+Below this, the user is also presented with an explainer, providing information on how to interpret result.
+
+![explainer](assets/static/output-explanation.png)
 
 ### Search another gene or exit
+After a successful or unsuccessful (but valid) gene search, the user is provided with the opportunity to search for another gene or exit the app. 
+If they choose to search again they receive the same menu choice at start of app:
+![search-again](assets/static/search-again.png)
 
+If they choose to exit, they recieve a short thank you message
+
+![exit-message](assets/static/exit-message.png)
 
 ## Future features
-
 ### Multiple gene search
+Allow a user to input several gene names/IDs into a single search to save time. This feature requires each entry to be seperated, validated and processed individually before all output brought togther at the end. This also allows the user to make easy comparisons between genes.
+
 ### Validation of gene name/ID against all known genes
+To extend the accuracy of validating a correct gene name or ensembl ID a worksheet that contains all known mouse genes and associated ID's will be generated and included. This would allow the statement that the gene exists but is not dysregulated in this model to be made which is very useful.
 
-### Compare genes
-
+### Expand number of databases to search
+Include other motor neuron disease gene expression databases. This allows to user to compare genes between databases and allows user to see if expression changes are consistent across all databases (reliable result) or present in some or one database (less reliable result).
 
 # App design process
 
@@ -74,7 +96,7 @@ To resolve this issue, and make the information more accessible, a console-based
  - provides appropriate error feedback and explanation if users input is not matched in dataset
 
 ## Design of information processing flow
-A flowchart of the steps in information processing that the app needed to follow was generated in Figma.
+A flowchart of the steps in information processing that the app needed to follow was mapped out in Figma.
 ![flowchart](assets/static/app_flowchart.png)
 This flowchart was used to guide the development of functions and processes within the app. As the app was built and changes were made to the flow of the app, the flow chart was adjusted accordingly.
 
