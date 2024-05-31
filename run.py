@@ -81,7 +81,7 @@ def name_search():
 
     if user_gene in NAMES:
         gene_index = NAMES.index(user_gene)
-        gene_expression()
+        gene_expression(gene_index)
     else:
         print(f"{user_gene} not found in dataset")
         not_found()
@@ -95,12 +95,12 @@ def ensembl_search():
 
     if user_ensembl in ENSEMBL:
         gene_index = ENSEMBL.index(user_ensembl)
-        gene_expression()
+        gene_expression(gene_index)
     else:
         print(f"{user_ensembl} not found in dataset")
         not_found()
 
-def gene_expression():
+def gene_expression(gene_index):
     """ 
     Takes gene index and outputs the expression data and significance value for the relevant gene
     Formats expression data to 2 decimal places and significance to 4 decimal places.
