@@ -1,3 +1,4 @@
+#setting up API and links to googlesheets
 import gspread
 from google.oauth2.service_account import Credentials
 
@@ -12,6 +13,7 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('FUSdelta14_gene_expression_database')
 
+#Accessing specific information from database in googlesheet
 NAMES = SHEET.worksheet("expression").col_values(1)
 ENSEMBL = SHEET.worksheet("expression").col_values(2)
 EXPRESSION = SHEET.worksheet("expression").col_values(5)
@@ -38,24 +40,23 @@ def user_search():
     
     return search_type
 
-def validate_input(values):
+def validate_input(value):
     """
     Uses try method to check validity of search_type input from user
     Raises a ValueError if:
     1. input is not a number ie. cannot be converted to an integer
     2. is not 1 or 2, which are the only numerical choices that are valid
-    It does not assume the user will input a single value, which is why iteration is used.
     This is a modification of the try method used in CI Love Sandwiches walkthrough project
     """
 
     try:
-        [int(value) for value in values]
-        if values != '1' and values != '2':
+        [int(value)]
+        if value != '1' and value != '2':
             raise ValueError(
-                f"You have entered an invalid number: {values}"
+                f"You have entered an invalid number: {value}"
                 )
     except ValueError as e:
-        print(f"Invalid data: {values}. Please enter a numerical value of 1 or 2.")
+        print(f"Invalid data: {value}. Please enter a numerical value of 1 or 2.")
         return False
 
     return True
