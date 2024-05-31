@@ -143,15 +143,21 @@ def gene_expression(gene_index):
     """
     expression_data = round(float(EXPRESSION[gene_index]), 2)
     gene = NAMES[gene_index]
+    ensembl_id = ENSEMBL[gene_index]
     pvalue = round(float(PVALUE[gene_index]), 4)
-    print(f'\nThe gene {gene} is differentially expressed by {expression_data}%,\n with a significance (p-value) of {pvalue}')
+    print(f"\nResult:\nGene: {gene}\nEnsembl ID: {ensembl_id}\nExpression: {expression_data} %\nP-value: {pvalue}\n")
+    print(f'Summary:\nThe gene {gene} is differentially expressed by {expression_data} %,\nwith a significance (p-value) of {pvalue}')
     print(""" 
     Explanation of result:
+    The result is a comparison of the FUSDelta14 model, when it is showing
+    early symptoms of Motor Neuron Disease (MND), compared to healthy controls
+    
     1. Expression
-    A positive expression % indicates an upregulation of gene expression 
-    from normal controls
-    A negative expression % indicates a downregulation of gene expression 
-    from normal controls
+    - A positive expression % indicates an upregulation of gene expression
+    from healthy controls
+    - A negative expression % indicates a downregulation of gene expression
+    from healthy controls
+
     2. p-value
     This dataset only contains genes with significance (p-value) of 
     0.01 or lower, which is a higher stringency for significance than
@@ -172,10 +178,10 @@ def not_found():
         - you can check your genes expression level in spinal cord at 
         GeneCards.org
     3. Your gene input had a typo:
-        - Please check you input, as not all typo's can be detected by our 
+        - please check you input, as not all typo's can be detected by our 
         validation protocols
     4. Your gene is not a mouse gene:
-        - This dataset is from mouse, therefore contains mouse genes only.
+        - this dataset is from mouse, therefore contains mouse genes only.
         - you can check correct mouse gene nomenclature at ensembl.org
     """)
 
@@ -190,7 +196,7 @@ def search_again():
 
 def initiate_search_again():
     """ 
-    Function that initiates the request proccessing for searching agiain or exiting search engine
+    Function that initiates the request processing for searching again or exiting search engine
     """
     while True:
         print("Would you like to search for another gene?\n Enter 1 for Yes to continue or 2 for No to exit search engine")
@@ -230,10 +236,3 @@ print("""
     This data is from Devoy et al., Brain, 2017.
     """)
 main()
-
-#gene_data = DATA[gene_index]
-#
-#print(gene_data)
-#print(expression_data)
-
-
