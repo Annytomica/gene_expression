@@ -81,6 +81,7 @@ To extend the accuracy of validating a correct gene name or ensembl ID a workshe
 ### Expand number of databases to search
 Include other motor neuron disease gene expression databases. This allows to user to compare genes between databases and allows user to see if expression changes are consistent across all databases (reliable result) or present in some or one database (less reliable result).
 
+
 # App design process
 
 ## Rationale
@@ -94,6 +95,13 @@ To resolve this issue, and make the information more accessible, a console-based
  - provides requested data quickly
  - provides the expression data in a format that is easy to understand and interpret
  - provides appropriate error feedback and explanation if users input is not matched in dataset
+
+## Data Model
+The data model used is the Genes class. 
+
+The Genes class holds all the relevant information for each gene in the Googlesheets database : Gene name, Ensembl ID, Gene expression, Siginficance value (p-value).
+
+The class also has method to produce a result output for a valid gene query, either via gene name or ensembl ID, to the app user.
 
 ## Design of information processing flow
 A flowchart of the steps in information processing that the app needed to follow was mapped out in Figma.
@@ -133,7 +141,7 @@ PYTHON - PEP8 validation: The app passed validation with no errors reported from
 
 ## Unfixed
 
-- No bugs remaining
+- App throws type error for search_selection(search_type) after introducing Genes as class and does not run past selecting search option.
 
 # Deployment
 
