@@ -121,16 +121,20 @@ def validate_ensembl(value):
     2. That it is 18 characters long
     3. That the last 11 characters are numbers
     """
-    try:
-        [value.startswith('ENSMUSG') and len(value) == 18] 
-        int_value = value.strip('ENSMUSG')
-        if not int(int_value):
-            raise ValueError(f"Incorrect ID: {value}. Ensembl IDs end with 11 numbers")
+    if value.startswith('ENSMUSG') and len(value) == 18:
+        try:
+            int_value = value[7:]
+            int(int_value) 
         
-    except ValueError as e:
-        print(f"Incorrect data: {value}.\nMust start with 'ENSMUSG' followed by 11 numbers")
+        except ValueError:
+            print(f"Incorrect ID: {value}. Ensembl IDs end with 11 numbers")
+            return False
     
-    return True
+        return True
+    
+    else:
+        print(f"Incorrect data: {value}.\nMust start with 'ENSMUSG' followed by 11 numbers")
+        return False
 
 def gene_expression(gene_index):
     """ 
