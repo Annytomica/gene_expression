@@ -80,9 +80,8 @@ def name_search():
     user_gene = input('Enter gene name here: \n').capitalize()
 
     if user_gene in NAMES:
-        global gene_index
         gene_index = NAMES.index(user_gene)
-        return gene_index
+        gene_expression()
     else:
         print(f"{user_gene} not found in dataset")
         not_found()
@@ -93,9 +92,13 @@ def ensembl_search():
     Outputs index for gene if present, or notifies user gene not found in database
     """
     user_ensembl = input('Enter Ensembl ID here: \n').upper()
-    ensembl_index = ENSEMBL.index(user_ensembl)
-    ensembl_data = DATA[ensembl_index]
-    print(ensembl_data)
+
+    if user_ensembl in ENSEMBL:
+        gene_index = ENSEMBL.index(user_ensembl)
+        gene_expression()
+    else:
+        print(f"{user_ensembl} not found in dataset")
+        not_found()
 
 def gene_expression():
     """ 
@@ -107,10 +110,16 @@ def gene_expression():
     pvalue = round(float(PVALUE[gene_index]), 4)
     print(f'\nThe gene {gene} is differentially expressed by {expression_data}%,\n with a significance (p-value) of {pvalue}')
     print(""" 
+    Explanation of result:
+    1. Expression
     A positive expression % indicates an upregulation of gene expression 
     from normal controls
     A negative expression % indicates a downregulation of gene expression 
     from normal controls
+    2. p-value
+    This dataset only contains genes with significance (p-value) of 
+    0.01 or lower, which is a higher stringency for significance than
+    0.05 which is generally regarded as acceptable in this field
     """)
 
 def not_found():
@@ -176,7 +185,6 @@ def main():
     """
     user_search()
     search_selection()
-    gene_expression()
     search_again()
 
 
