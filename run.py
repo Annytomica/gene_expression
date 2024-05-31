@@ -13,13 +13,11 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('FUSdelta14_gene_expression_database')
 
-#Accessing specific information from database in googlesheet
+#Constants that access specific information from database in googlesheets
 NAMES = SHEET.worksheet("expression").col_values(1)
 ENSEMBL = SHEET.worksheet("expression").col_values(2)
 EXPRESSION = SHEET.worksheet("expression").col_values(5)
 PVALUE = SHEET.worksheet("expression").col_values(6)
-DATA = SHEET.worksheet("expression").get_all_values()
-HEADINGS = DATA[0]
 
 def user_search():
     """ 
@@ -49,13 +47,11 @@ def validate_input(value):
     2. is not 1 or 2, which are the only numerical choices that are valid
     This is a modification of the try method used in CI Love Sandwiches walkthrough project
     """
-
     try:
         [int(value)]
         if value != '1' and value != '2':
-            raise ValueError(
-                f"You have entered an invalid number: {value}"
-                )
+            raise ValueError(f"You have entered an invalid number: {value}")
+    
     except ValueError as e:
         print(f"Invalid data: {value}. Please enter a numerical value of 1 or 2.")
         return False
@@ -69,6 +65,7 @@ def search_selection(search_type):
     if search_type == '1':
         print('You have chosen to search by gene name\n')
         name_search()
+    
     elif search_type == '2':
         print('You have chosen to search by ensembl ID\n')
         ensembl_search()
@@ -83,6 +80,7 @@ def name_search():
     if user_gene in NAMES:
         gene_index = NAMES.index(user_gene)
         gene_expression(gene_index)
+    
     else:
         print(f"{user_gene} not found in dataset")
         not_found()
@@ -105,10 +103,12 @@ def ensembl_search():
 
         if validate_ensembl(user_ensembl):
             print("Your Ensembl ID is valid\n")
+            
             if user_ensembl in ENSEMBL:
                 gene_index = ENSEMBL.index(user_ensembl)
                 gene_expression(gene_index)
                 break
+            
             else:
                 print(f"{user_ensembl} not found in dataset")
                 not_found()
@@ -145,6 +145,7 @@ def gene_expression(gene_index):
     gene = NAMES[gene_index]
     ensembl_id = ENSEMBL[gene_index]
     pvalue = round(float(PVALUE[gene_index]), 4)
+    
     print(f"\nResult:\nGene: {gene}\nEnsembl ID: {ensembl_id}\nExpression: {expression_data} %\nP-value: {pvalue}\n")
     print(f'Summary:\nThe gene {gene} is differentially expressed by {expression_data} %,\nwith a significance (p-value) of {pvalue}')
     print(""" 
@@ -213,7 +214,6 @@ def process_search_again(try_again):
     """ 
     Function to process search again/exit request after validation
     """
-
     if try_again == '1':
         main()
     elif try_again == '2':
