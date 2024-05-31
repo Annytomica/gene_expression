@@ -19,6 +19,62 @@ ENSEMBL = SHEET.worksheet("expression").col_values(2)
 EXPRESSION = SHEET.worksheet("expression").col_values(5)
 PVALUE = SHEET.worksheet("expression").col_values(6)
 
+# Gene class as data model
+class Gene:
+    def __init__(self, name, ensembl_id, expression, pvalue):
+        self.name = name
+        self.ensembl_id = ensembl_id
+        self.expression = expression
+        self.pvalue = pvalue
+
+    def gene_expression(self):
+        """
+        Outputs the expression data and
+        significance value for the relevant gene.
+        Formats expression data to 2 decimal places and
+        significance to 4 decimal places.
+        """
+        expression_data = round(float(self.expression), 2)
+        pvalue = round(float(self.pvalue), 4)
+
+        print(f"""
+        Result:
+        Gene: {self.name}
+        Ensembl ID: {self.ensembl_id}
+        Expression: {expression_data} %
+        P-value: {pvalue}\n""")
+        print(f"""
+        Summary:
+        The gene {self.name} is differentially expressed by {expression_data} %,
+        with a significance (p-value) of {pvalue}""")
+        print("""
+        Explanation of result:
+        The result is a comparison of the FUSDelta14 model, when it is showing
+        early symptoms of Motor Neuron Disease (MND), compared to healthy controls
+
+        1. Expression
+        - A positive expression % indicates an upregulation of gene expression
+        from healthy controls
+        - A negative expression % indicates a downregulation of gene expression
+        from healthy controls
+
+        2. p-value
+        This dataset only contains genes with significance (p-value) of
+        0.01 or lower, which is a higher stringency for significance than
+        0.05 which is generally regarded as acceptable in this field
+        """)
+
+
+def gene_data():
+    """
+    Formats data from googlesheets for use as list of Gene objects
+    Logic for this function was developed with help from ChatGPT
+    """
+    genes = []
+    for name, ensembl_id, expression, pvalue in zip(NAMES, ENSEMBL, EXPRESSION, PVALUE):
+        genes.append(Gene(name, ensembl_id, expression, pvalue))
+
+    return genes
 
 def user_search():
     """
@@ -77,21 +133,21 @@ def search_selection(search_type):
         ensembl_search()
 
 
-def name_search():
+def name_search(genes):
     """
     Takes gene name from user and searches database for gene
-    Outputs index for gene if present,
+    Outputs expression data for gene if present,
     or notifies user gene not found in database
     """
     user_gene = input('Enter gene name here: \n').capitalize()
 
-    if user_gene in NAMES:
-        gene_index = NAMES.index(user_gene)
-        gene_expression(gene_index)
+    for gene in genes:
+        if gene.name == user_gene:
+            gene.gene_expression()
+            return
 
-    else:
-        print(f"{user_gene} not found in database")
-        not_found()
+    print(f"{user_gene} not found in database")
+    not_found()
 
 
 def ensembl_search():
@@ -149,46 +205,6 @@ def validate_ensembl(value):
         Incorrect data: {value}.
         Must start with 'ENSMUSG' followed by 11 numbers""")
         return False
-
-
-def gene_expression(gene_index):
-    """
-    Takes gene index and outputs the expression data and
-    significance value for the relevant gene.
-    Formats expression data to 2 decimal places and
-    significance to 4 decimal places.
-    """
-    expression_data = round(float(EXPRESSION[gene_index]), 2)
-    gene = NAMES[gene_index]
-    ensembl_id = ENSEMBL[gene_index]
-    pvalue = round(float(PVALUE[gene_index]), 4)
-
-    print(f"""
-    Result:
-    Gene: {gene}
-    Ensembl ID: {ensembl_id}
-    Expression: {expression_data} %
-    P-value: {pvalue}\n""")
-    print(f"""
-    Summary:
-    The gene {gene} is differentially expressed by {expression_data} %,
-    with a significance (p-value) of {pvalue}""")
-    print("""
-    Explanation of result:
-    The result is a comparison of the FUSDelta14 model, when it is showing
-    early symptoms of Motor Neuron Disease (MND), compared to healthy controls
-
-    1. Expression
-    - A positive expression % indicates an upregulation of gene expression
-    from healthy controls
-    - A negative expression % indicates a downregulation of gene expression
-    from healthy controls
-
-    2. p-value
-    This dataset only contains genes with significance (p-value) of
-    0.01 or lower, which is a higher stringency for significance than
-    0.05 which is generally regarded as acceptable in this field
-    """)
 
 
 def not_found():
@@ -260,6 +276,7 @@ def main():
     """
     Runs all functions for gene expression database search
     """
+    genes = gene_data()
     search_type = user_search()
     search_selection(search_type)
     search_again()
