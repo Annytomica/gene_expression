@@ -4,21 +4,46 @@ This is a command line python application for searching gene expression changes 
 
 The database is gene expression data generated from the FUSDelta14 model, published in Devoy et al. Brain, 2017. The full publication can be found [here](https://academic.oup.com/brain/article/140/11/2797/4372144)
 
-The live application can be found [here]()
+The live application can be found [here](https://gene-expression-d9cbf16d3290.herokuapp.com/)
+![mock-up](assets/static/mock-up_amiresponsive.png)
 
 # Features
 
 ## Existing features
 
-### Introduction and app explainer
+### Introduction and search options
+The app loads and presents the user with a brief introduction to the app and explanation of its purpose. 
 
+It then introduces the choices of method to search the database, using either gene name or Ensembl ID. This is followed by the prompt for the user to chose which search method they would like to use.
 
-### Request for gene to search
+![intro](assets/static/intro.png)
+
+### Gene search request
+The two search methods have different validation steps for user input, before providing the same output if the search is successful.
+
+#### Validation
+If the user does not input an appropriate value input validation will provide an error message and request the user try again
+
+![choice-error](assets/static/incorrect_search_choice.png)
 
 #### Gene Name
+After intial selection, if valid, the user recieves a confirmation of thier choice and a prompt to enter the gene name.
+
+![enter-gene](assets/static/gene-name_initial-choice.png)
+
+Validation of gene name:
+The only validation of gene name is checking if it is in the database. This is because gene names can be a mix of letters and numbers and of variable character length. An improvement of this validation is discussed in future features.
+
+If the name is not found in the database the following message is displayed - explaining why it may not have been be found - along with provision to search again or exit.
+
+![not-in-dataset](assets/static/not-in-dataset-message.png)
 
 #### Ensembl ID
+After intial selection, if valid, the user recieves a confirmation of thier choice and a prompt to enter the ensembl ID. This ID has a very specific format and so the criteria for the ID are set out for the user to minimise input error.
 
+![enter-ensembl](assets/static/ensembl_initial-choice.png)
+
+Validation of ensembl ID:
 
 ### Output
 
@@ -76,16 +101,17 @@ This flowchart was used to guide the development of functions and processes with
 ### Testing Summary
 
 ## Final Validation
-
+PYTHON - PEP8 validation: The app passed validation with no errors reported from [CI pep8 python linter](https://pep8ci.herokuapp.com/)
+![Validation](assets/static/pep8_validation_result.png)
 
 # Bugs
 ## Fixed
-- gene_expression function print output occurs twice if user has selected to search again on deployed app. Cause unknown. Was present in first Heroku deployment and dissapeared after update. Logic for calling the function was changed anyway, to protect from similar bug occuring in future.
-- validation of ensembl ID input not working. Does not detect change in length or incorrect format. Logic error - used ChatGPT to troubleshoot and adjust logic so that validation steps worked correctly.
+- Gene_expression function print output occurs twice if user has selected to search again on deployed app. FIX: Cause unknown. Was present in first Heroku deployment and dissapeared after update. Logic for calling the function was changed anyway, to protect from similar bug occuring in future.
+- Validation of ensembl ID input not working. Does not detect change in length or incorrect format. FIX: Logic error - used ChatGPT to troubleshoot and adjust logic so that validation steps worked correctly.
 
 ## Unfixed
 
-
+- No bugs remaining
 
 # Deployment
 
