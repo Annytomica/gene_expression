@@ -31,7 +31,7 @@ def user_search():
         To search by gene name enter 1
         To search by Ensembl ID enter 2
         ''')
-        global search_type
+        
         search_type = input('Enter 1 or 2 now: \n')
 
         if validate_input(search_type):
@@ -61,7 +61,7 @@ def validate_input(value):
 
     return True
 
-def search_selection():
+def search_selection(search_type):
     """
     Takes validated search type and selects appropriate gene search function 
     """
@@ -99,6 +99,14 @@ def ensembl_search():
     else:
         print(f"{user_ensembl} not found in dataset")
         not_found()
+
+def validate_ensembl(value):
+    """ 
+    Checks if user input for ensembl ID is correct format by checking:
+    1. That is starts with the correct ensembl mouse gene nomenclature of ENSMUSG
+    2. That it is 18 characters long
+    3. That the last 11 characters are numbers
+    """
 
 def gene_expression(gene_index):
     """ 
@@ -183,8 +191,8 @@ def main():
     """ 
     Runs all functions for gene expression database search
     """
-    user_search()
-    search_selection()
+    search_type = user_search()
+    search_selection(search_type)
     search_again()
 
 
