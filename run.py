@@ -162,7 +162,7 @@ def validate_name(value):
     """
     Checks if user has input a gene name and not left input empty
     """
-    
+
     if value == "" or value.isspace():
         print(f"No gene name provided: Please enter gene name")
         return False

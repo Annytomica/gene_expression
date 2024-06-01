@@ -33,7 +33,11 @@ After intial selection, if valid, the user recieves a confirmation of thier choi
 ![enter-gene](assets/static/gene-name_initial-choice.png)
 
 Validation of gene name:
-The only validation of gene name is checking if it is in the database. This is because gene names can be a mix of letters and numbers and of variable character length. An improvement of this validation is discussed in future features.
+The only validation was checking is user had not hit enter without entering a gene name, which produces the following error message.
+
+![empty-field](assets/static/empty-field.png)
+
+This is because gene names can be a mix of letters and numbers and of variable character length. An improvement of this validation is discussed in future features.
 
 If the name is not found in the database the following message is displayed - explaining why it may not have been be found - along with provision to search again or exit.
 
@@ -151,6 +155,7 @@ All functions, including validation steps were tested after each deployment. Tes
 2. gene name search
     - test if valid gene name (fus) produced correct gene expression output
     - test if invalid gene (moby) produced the correct 'gene not found' response
+    - test if empty field produced correct error message
 
 3. ensembl ID search
     - test if valid ID (ENSMUSG00000032047) produced correct gene expression output
@@ -160,6 +165,7 @@ All functions, including validation steps were tested after each deployment. Tes
         - not 18 characters (ENSMUSG000000320)
         - ENSMUSG start wrong (ENSMUPG00000032047)
         - last 11 characters not numbers (ENSMUSG0000003204m)
+        - input begins with empty space before ID ( ENSMUSG00000032047)
 
 4. search again/ exit
     - test if valid input starts search again or produces thank you messsage on exit correctly
@@ -195,9 +201,10 @@ PYTHON - PEP8 validation: The app passed validation with no errors reported from
 - Gene_expression function print output occurs twice if user has selected to search again on deployed app. FIX: Cause unknown. Was present in first Heroku deployment and dissapeared after update. Logic for calling the function was changed anyway, to protect from similar bug occuring in future.
 - Validation of ensembl ID input not working. Does not detect change in length or incorrect format. FIX: Logic error - used ChatGPT to troubleshoot and adjust logic so that validation steps worked correctly.
 - App throws type error for search_selection(search_type) after introducing Genes as class and does not run past selecting search option. FIX: required inclusion of genes as input variable: search_selection(search_type, genes) in both function and when called in main.
+- no input for gene name search produces 'gene not found' message, not value error. FIX: created validate_name function to deal with empty field correctly.
 
 ## Unfixed
-- no input for gene name search produces 'gene not found' message, not data incorrect error.
+- No bugs remaining
 
 # Deployment
 For deployment this project uses a mock terminal for Heroku provided by Code Institute. The app was deployed to Heroku using the process described in the CI python module coursework.
