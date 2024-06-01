@@ -23,12 +23,12 @@ It then introduces the choices of method to search the database, using either ge
 The two search methods have different validation steps for user input, before providing the same output if the search is successful.
 
 #### Validation
-If the user does not input an appropriate value input validation will provide an error message and request the user try again
+If the user does not input an appropriate value, input validation will provide an error message and request the user try again.
 
 ![choice-error](assets/static/incorrect_search_choice.png)
 
 #### Gene Name
-After intial selection, if valid, the user recieves a confirmation of thier choice and a prompt to enter the gene name.
+After intial selection, if valid, the user recieves a confirmation of their choice and a prompt to enter the gene name.
 
 ![enter-gene](assets/static/gene-name_initial-choice.png)
 
@@ -44,7 +44,7 @@ If the name is not found in the database the following message is displayed - ex
 ![not-in-dataset](assets/static/not-in-dataset-message.png)
 
 #### Ensembl ID
-After intial selection, if valid, the user recieves a confirmation of thier choice and a prompt to enter the ensembl ID. This ID has a very specific format and so the criteria for the ID are set out for the user to minimise input error.
+After intial selection, if valid, the user recieves a confirmation of their choice and a prompt to enter the ensembl ID. This ID has a very specific format and so the criteria for the ID are set out for the user to minimise input error.
 
 ![enter-ensembl](assets/static/ensembl_initial-choice.png)
 
@@ -84,13 +84,13 @@ Allow a user to input several gene names/IDs into a single search to save time. 
 To extend the accuracy of validating a correct gene name or ensembl ID a worksheet that contains all known mouse genes and associated ID's will be generated and included. This would allow the statement that the gene exists but is not dysregulated in this model to be made which is very useful.
 
 ### Expand number of databases to search
-Include other motor neuron disease gene expression databases. This allows to user to compare genes between databases and allows user to see if expression changes are consistent across all databases (reliable result) or present in some or one database (less reliable result).
+Include other motor neuron disease gene expression databases. This allows user to compare genes between databases and allows user to see if expression changes are consistent across all databases (reliable result) or present in some or one database (less reliable result).
 
 ### Enable copy and paste to mock terminal
 Presently the terminal does not accept a copy and pasted entry. This is problematic for the ensembl ID in particular as manual entry of this 18 character ID significantly increases the chance of user error with input. It would also be essential to have once multiple gene search is available.
 
 ### Redesign mock terminal for use on mobiles
-Testing identified that the mock terminal was not suitable forr running the app on small or touchscreens. To make the app more accessible to all devices adaptive sizing for mock terminal will be added.
+Testing identified that the mock terminal was not suitable for running the app on small or touchscreens. To make the app more accessible to all devices adaptive sizing for mock terminal will be added.
 
 
 # App design process
@@ -124,13 +124,13 @@ This flowchart was used to guide the development of functions and processes with
 ## Development process
 The app development followed the logical flow outlined in the flowchart, with steps outlined below:
 1. linked googlesheet database and created constants from data
-2. Intro and search type selection
+2. intro and search type selection
 3. search type validation
 4. gene name search
 5. gene expression output
 6. new search or exit
 7. ensembl ID search and validation
-8. Introduction of Gene class and function refactoring
+8. introduction of Gene class and function refactoring
 
 The Gene class was added at a late stage in development as inclusion of a data model was intially missed from the app design. As all functions were already working, this refactoring required minimal change to app structure and functions.
 
@@ -178,11 +178,13 @@ Chrome (primary), Firefox , Edge and Brave
 
 ### Devices
 - Phones: Pixel4a
-- Laptops: Dell Inspirion 13”, MacBook Air 13”, MacBook Pro 17" (older model)
+- Laptops: Dell Inspirion 13”, MacBook Air 13”
 - Desktop screens: BenQ PD series 27”
 
 ## Testing Summary
 The app worked on all devices and browsers tested, with no issues with loading or novel error messages found.
+
+![testing-table](assets/static/testing-table.png)
 
 #### Not suitable for mobile phones
 While the app is functional on mobiles the following issues were apparent:
@@ -201,7 +203,7 @@ PYTHON - PEP8 validation: The app passed validation with no errors reported from
 - Gene_expression function print output occurs twice if user has selected to search again on deployed app. FIX: Cause unknown. Was present in first Heroku deployment and dissapeared after update. Logic for calling the function was changed anyway, to protect from similar bug occuring in future.
 - Validation of ensembl ID input not working. Does not detect change in length or incorrect format. FIX: Logic error - used ChatGPT to troubleshoot and adjust logic so that validation steps worked correctly.
 - App throws type error for search_selection(search_type) after introducing Genes as class and does not run past selecting search option. FIX: required inclusion of genes as input variable: search_selection(search_type, genes) in both function and when called in main.
-- no input for gene name search produces 'gene not found' message, not value error. FIX: created validate_name function to deal with empty field correctly.
+- No input for gene name search produces 'gene not found' message, not value error. FIX: created validate_name function to deal with empty field correctly.
 
 ## Unfixed
 - No bugs remaining
@@ -239,7 +241,7 @@ I would also like to note that this app was developed during a period where I wa
 - [Code Institute (CI)](https://github.com/Code-Institute-Solutions) for providing all supporting code for the virtual console used for deployment of app
 - [CI Love Sandwiches walkthrough project](https://github.com/Code-Institute-Solutions/love-sandwiches-p5-sourcecode):
     - linking API and Google sheets process and code
-    - Deployment to Heroku
+    - deployment to Heroku
     - usage of try method - used as starting point for validate_input function
 - [Medium](https://aryanirani123.medium.com/read-and-write-data-in-google-sheets-using-python-and-the-google-sheets-api-6e206a242f20) for tutorial on methods of getting specific information from Google sheets
 - [W3Schools](https://www.w3schools.com/python/python_try_except.asp) tutorial on usage of try/except for validation functions
@@ -258,4 +260,4 @@ I would also like to note that this app was developed during a period where I wa
 
 ## Acknowledgements
 - My wife, Megan, for help with testing and general emotional support while I was trying to study and code while also moving country.
-- My original science colleagues, without thier contributions I would not have produced the dataset this app is based around.
+- My original science colleagues, without their contributions I would not have produced the dataset this app is based around.
