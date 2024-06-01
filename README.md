@@ -5,6 +5,7 @@ This is a command line python application for searching gene expression changes 
 The database is gene expression data generated from the FUSDelta14 model, published in Devoy et al. Brain, 2017. The full publication can be found [here](https://academic.oup.com/brain/article/140/11/2797/4372144)
 
 The live application can be found [here](https://gene-expression-d9cbf16d3290.herokuapp.com/)
+
 ![mock-up](assets/static/mock-up_amiresponsive.png)
 
 # Features
@@ -189,6 +190,7 @@ I would like to acknowledge and thank the following people and resources used in
 - [ChatGPT](https://chatgpt.com) for typo identification and optimising logic for validation functions (not writing of primary code)
 - [Free Code Camp](https://www.freecodecamp.org/news/python-exit-how-to-use-an-exit-function-in-python-to-stop-a-program/) for tutorial on how to use exit() function
 - [geeksforgeeks.org](https://www.geeksforgeeks.org/precision-handling-python/) for rounding float to 2 decimal places tutorial
+- [Python.org](https://peps.python.org/pep-0008/#indentation) for guidance on how to split and indent code when single line to long.
 
 ## Media
 - The Github summary bar used in README.md is from [shields.io](https://shields.io/badges/)
