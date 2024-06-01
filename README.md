@@ -81,6 +81,9 @@ To extend the accuracy of validating a correct gene name or ensembl ID a workshe
 ### Expand number of databases to search
 Include other motor neuron disease gene expression databases. This allows to user to compare genes between databases and allows user to see if expression changes are consistent across all databases (reliable result) or present in some or one database (less reliable result).
 
+### Enable copy and paste to mock terminal
+Presently the terminal does not accept a copy and pasted entry. This is problematic for the ensembl ID in particular as manual entry of this 18 character ID significantly increases the chance of user error with input. It would also be essential to have once multiple gene search is available.
+
 
 # App design process
 
@@ -101,7 +104,7 @@ The data model used is the Genes class.
 
 The Genes class holds all the relevant information for each gene in the Googlesheets database : Gene name, Ensembl ID, Gene expression, Siginficance value (p-value).
 
-The class also has method to produce a result output for a valid gene query, either via gene name or ensembl ID, to the app user.
+The class also has method, gene_expression(), to produce a result output for a valid gene query, either via gene name or ensembl ID, to the app user.
 
 Choosing this data model enables easy expansion of app to include new datasets in the future.
 
