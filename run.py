@@ -150,7 +150,7 @@ def name_search(genes):
     not_found()
 
 
-def ensembl_search():
+def ensembl_search(genes):
     """
     Takes ensembl ID from user and searches database for gene
     Validates user input for correct ensembl ID format
@@ -170,15 +170,13 @@ def ensembl_search():
         if validate_ensembl(user_ensembl):
             print("Your Ensembl ID is valid\n")
 
-            if user_ensembl in ENSEMBL:
-                gene_index = ENSEMBL.index(user_ensembl)
-                gene_expression(gene_index)
-                break
+            for gene in genes:
+                if gene.ensembl_id == user_ensembl:
+                    gene.gene_expression()
+                    return
 
-            else:
-                print(f"{user_ensembl} not found in dataset")
-                not_found()
-                break
+            print(f"{user_ensembl} not found in dataset")
+            not_found()
 
 
 def validate_ensembl(value):
