@@ -103,6 +103,8 @@ The Genes class holds all the relevant information for each gene in the Googlesh
 
 The class also has method to produce a result output for a valid gene query, either via gene name or ensembl ID, to the app user.
 
+Choosing this data model enables easy expansion of app to include new datasets in the future.
+
 ## Design of information processing flow
 A flowchart of the steps in information processing that the app needed to follow was mapped out in Figma.
 ![flowchart](assets/static/app_flowchart.png)
@@ -115,7 +117,7 @@ This flowchart was used to guide the development of functions and processes with
 - Python - all app functions
 - Figma – flowchart development
 - Photoshop - Readme image processing
-- ChatGPT - troubleshooting of typos and logic problems
+- ChatGPT - troubleshooting, typo finding and logic problems
 - Heroku - app deployment and hosting
 - UI.dev – amiresponsive was used to create site mockup images.
 
@@ -139,10 +141,11 @@ PYTHON - PEP8 validation: The app passed validation with no errors reported from
 ## Fixed
 - Gene_expression function print output occurs twice if user has selected to search again on deployed app. FIX: Cause unknown. Was present in first Heroku deployment and dissapeared after update. Logic for calling the function was changed anyway, to protect from similar bug occuring in future.
 - Validation of ensembl ID input not working. Does not detect change in length or incorrect format. FIX: Logic error - used ChatGPT to troubleshoot and adjust logic so that validation steps worked correctly.
+- App throws type error for search_selection(search_type) after introducing Genes as class and does not run past selecting search option. FIX: required inclusion of genes as input variable: search_selection(search_type, genes) in both function and when called in main.
 
 ## Unfixed
 
-- App throws type error for search_selection(search_type) after introducing Genes as class and does not run past selecting search option.
+
 
 # Deployment
 For deployment this project uses a mock terminal for Heroku provided by Code Institute. The app was deployed to Heroku using the process described in the CI python module coursework.

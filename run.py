@@ -120,17 +120,17 @@ def validate_input(value):
     return True
 
 
-def search_selection(search_type):
+def search_selection(search_type, genes):
     """
     Takes validated search type and selects appropriate gene search function
     """
     if search_type == '1':
         print('You have chosen to search by gene name\n')
-        name_search()
+        name_search(genes)
 
     elif search_type == '2':
         print('You have chosen to search by ensembl ID\n')
-        ensembl_search()
+        ensembl_search(genes)
 
 
 def name_search(genes):
@@ -278,7 +278,7 @@ def main():
     """
     genes = gene_data()
     search_type = user_search()
-    search_selection(search_type)
+    search_selection(search_type, genes)
     search_again()
 
 
