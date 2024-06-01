@@ -19,6 +19,7 @@ ENSEMBL = SHEET.worksheet("expression").col_values(2)
 EXPRESSION = SHEET.worksheet("expression").col_values(5)
 PVALUE = SHEET.worksheet("expression").col_values(6)
 
+
 # Gene class as data model
 class Gene:
     def __init__(self, name, ensembl_id, expression, pvalue):
@@ -45,12 +46,13 @@ class Gene:
         P-value: {pvalue}\n""")
         print(f"""
         Summary:
-        The gene {self.name} is differentially expressed by {expression_data} %,
+        The gene {self.name} is differentially expressed by {expression_data}%,
         with a significance (p-value) of {pvalue}""")
         print("""
         Explanation of result:
-        The result is a comparison of the FUSDelta14 model, when it is showing
-        early symptoms of Motor Neuron Disease (MND), compared to healthy controls
+        The result is a comparison of the FUSDelta14 model, when it is
+        showing early symptoms of Motor Neuron Disease (MND),
+        compared to healthy controls.
 
         1. Expression
         - A positive expression % indicates an upregulation of gene expression
@@ -71,10 +73,12 @@ def gene_data():
     Logic for this function was developed with help from ChatGPT
     """
     genes = []
-    for name, ensembl_id, expression, pvalue in zip(NAMES, ENSEMBL, EXPRESSION, PVALUE):
+    for name, ensembl_id, expression, pvalue in zip(NAMES, ENSEMBL,
+                                                    EXPRESSION, PVALUE):
         genes.append(Gene(name, ensembl_id, expression, pvalue))
 
     return genes
+
 
 def user_search():
     """
