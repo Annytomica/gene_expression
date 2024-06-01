@@ -165,10 +165,23 @@ All functions, including validation steps were tested after each deployment. Tes
 ## Devices and Browsers
 
 ### Web browsers
+Chrome (primary), Firefox , Edge and Brave
 
 ### Devices
+- Phones: Pixel4a
+- Laptops: Dell Inspirion 13”, MacBook Air 13”, MacBook Pro 17" (older model)
+- Desktop screens: BenQ PD series 27”
 
 ### Testing Summary
+The app worked on all devices and browsers tested, with no issues with loading or novel error messages found.
+
+#### Not suitable for mobile phones
+While the app is functional on mobiles the following issues were apparent:
+- The mock terminal did not resize for smaller mobile screens and so:
+    - required sideways scrolling to read. 
+    - The terminal was partially covered by qwerty keyboard whenever user was required to input request, blocking the users view of what they were inputting
+
+Conclusion: The mock terminal requires a redesign to enable effective use on mobiles and any device with touch screen that may become visually blocked when using qwerty keyboard.
 
 ## Final Validation
 PYTHON - PEP8 validation: The app passed validation with no errors reported from [CI pep8 python linter](https://pep8ci.herokuapp.com/)
