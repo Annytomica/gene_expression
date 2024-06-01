@@ -85,6 +85,9 @@ Include other motor neuron disease gene expression databases. This allows to use
 ### Enable copy and paste to mock terminal
 Presently the terminal does not accept a copy and pasted entry. This is problematic for the ensembl ID in particular as manual entry of this 18 character ID significantly increases the chance of user error with input. It would also be essential to have once multiple gene search is available.
 
+### Redesign mock terminal for use on mobiles
+Testing identified that the mock terminal was not suitable forr running the app on small or touchscreens. To make the app more accessible to all devices adaptive sizing for mock terminal will be added.
+
 
 # App design process
 
@@ -138,7 +141,7 @@ The Gene class was added at a late stage in development as inclusion of a data m
 # Testing
 
 ## General Strategy
-Functions were tested as they were developed by running run.py within IDE terminal. The app was only deployed to Heroku once all gene name search and general functions were developed. The ensembl ID search functions were added after deployment, with initial function testing still carried out in IDE terminal. 
+Functions were tested as they were developed by running run.py within IDE terminal (Gitpod). The app was only deployed to Heroku once all gene name search and general functions were developed. The ensembl ID search functions were added after deployment, with initial function testing still carried out in IDE terminal. 
 
 All functions, including validation steps were tested after each deployment. Testing steps were as follows:
 1. search selection
@@ -172,7 +175,7 @@ Chrome (primary), Firefox , Edge and Brave
 - Laptops: Dell Inspirion 13”, MacBook Air 13”, MacBook Pro 17" (older model)
 - Desktop screens: BenQ PD series 27”
 
-### Testing Summary
+## Testing Summary
 The app worked on all devices and browsers tested, with no issues with loading or novel error messages found.
 
 #### Not suitable for mobile phones

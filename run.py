@@ -143,15 +143,31 @@ def name_search(genes):
     Outputs expression data for gene if present,
     or notifies user gene not found in database
     """
-    user_gene = input('Enter gene name here: \n').capitalize()
+    while True:
+        user_gene = input('Enter gene name here: \n').capitalize()
 
-    for gene in genes:
-        if gene.name == user_gene:
-            gene.gene_expression()
-            return
+        if validate_name(user_gene):
+            print("Your gene name is accepted for search\n")
 
-    print(f"{user_gene} not found in database")
-    not_found()
+            for gene in genes:
+                if gene.name == user_gene:
+                    gene.gene_expression()
+                    return
+
+            print(f"{user_gene} not found in database")
+            not_found()
+
+
+def validate_name(value):
+    """
+    Checks if user has input a gene name and not left input empty
+    """
+    
+    if value == "" or value.isspace():
+        print(f"No gene name provided: Please enter gene name")
+        return False
+
+    return True
 
 
 def ensembl_search(genes):
